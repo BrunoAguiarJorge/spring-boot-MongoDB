@@ -8,38 +8,38 @@ public class Comments {
 
 	private Author author;
 
-public Comments() {}
+	public Comments() {
+	}
 
-public Comments(String text, Instant moment, Author author) {
-	super();
-	this.text = text;
-	this.moment = moment;
-	this.author = author;
-}
+	public Comments(String text, Instant moment, Author author) {
+		super();
+		this.text = text;
+		this.moment = moment;
+		this.author = author;
+	}
 
-public String getText() {
-	return text;
-}
+	public String getText() {
+		return text;
+	}
 
-public void setText(String text) {
-	this.text = text;
-}
+	public void setText(String text) {
+		this.text = text;
+	}
 
-public Instant getMoment() {
-	return moment;
-}
+	public Instant getMoment() {
+		return moment;
+	}
 
-public void setMoment(Instant moment) {
-	this.moment = moment;
-}
+	public void setMoment(Instant moment) {
+		this.moment = moment;
+	}
 
-public Author getAuthor() {
-	return author;
-}
+	public Author getAuthor() {
+		return author;
+	}
 
-public void setAuthor(Author author) {
-	this.author = author;
-}
-
+	public void setAuthor(Author author) {
+		this.author = author;
+	}
 
 }
