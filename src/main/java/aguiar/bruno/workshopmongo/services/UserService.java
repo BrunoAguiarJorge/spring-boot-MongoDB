@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import aguiar.bruno.workshopmongo.models.dto.UserDTO;
@@ -24,10 +23,14 @@ public class UserService {
 		return list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
 	}
 	public UserDTO findById(String id) {
-		Optional<User> result = userRepository.findById(id);
-		User entity = result.orElseThrow(() -> new ResourceNotFoundException("Object not found!"));
+	User entity = getEntityById(id);
 		return new UserDTO(entity);
 		
+	}
+	
+	public User getEntityById(String id) {
+		Optional<User> result = userRepository.findById(id);
+		return result.orElseThrow(() -> new ResourceNotFoundException("Object not found!"));
 	}
 	
 	public UserDTO insert(UserDTO dto) {
@@ -35,6 +38,13 @@ public class UserService {
 		copyDtoToEntity(dto, entity);
 		entity = userRepository.insert(entity);
 		return new UserDTO(entity);
+	}
+	
+	public UserDTO update(String id, UserDTO dto) {
+	User entity = getEntityById(id);
+	copyDtoToEntity(dto, entity);
+	entity = userRepository.save(entity);
+	return new UserDTO(entity);
 	}
 	private void copyDtoToEntity(UserDTO dto, User entity) {
 		entity.setName(dto.getName());
