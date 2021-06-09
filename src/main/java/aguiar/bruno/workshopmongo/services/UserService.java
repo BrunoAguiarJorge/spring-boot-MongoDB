@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import aguiar.bruno.workshopmongo.models.dto.UserDTO;
@@ -28,4 +29,17 @@ public class UserService {
 		return new UserDTO(entity);
 		
 	}
+	
+	public UserDTO insert(UserDTO dto) {
+		User entity = new User();
+		copyDtoToEntity(dto, entity);
+		entity = userRepository.insert(entity);
+		return new UserDTO(entity);
+	}
+	private void copyDtoToEntity(UserDTO dto, User entity) {
+		entity.setName(dto.getName());
+		entity.setEmail(dto.getEmail());
+		
+	}
+	
 }
